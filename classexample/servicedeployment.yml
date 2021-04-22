@@ -6,35 +6,52 @@ metadata:
 spec:
   selector:
     app: animalsApp   
+  type: LoadBalancer
   ports:          
   - name: http     
     protocol: TCP
     port: 80
     targetPort: 80
-  - name: https
-    protocol: TCP
-    port: 443
-    targetPort: 8080
-  type: LoadBalancer
+ 
 
 ---
-apiVersion: v1 
-kind: Pod  
-metadata: 
- name: animals
- labels:
-   app: animalsApp
- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: animals-v1
 spec:
- containers: 
- - name: animal-bear 
-   image: supergiantkir/animals:bear
-   ports: 
-   - containerPort: 80
+  selector:
+    matchLabels:
+      app: animalsApp
+  template: 
+    metadata:
+      labels:
+        app: animalsApp
+    spec:
+      containers:
+      - name: animal-bear 
+        image: supergiantkir/animals:bear
+        ports:
+        - containerPort: 80
+---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: animals-v2
+spec:
+  selector:
+    matchLabels:
+      app: animalsApp
+  template: 
+    metadata:
+      labels:
+        app: animalsApp
+    spec:
+      containers:
+      - name: animal-moose 
+        image: supergiantkir/animals:moose
+        ports:
+        - containerPort: 80
 
- - name: animal-moose
-   image: supergiantkir/animals:moose
-   ports: 
-   - containerPort: 8080
  
