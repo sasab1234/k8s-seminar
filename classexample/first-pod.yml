@@ -4,8 +4,8 @@ metadata:
  name: nginx 
 spec:
  containers: 
- - name: nginx 
-   image: nginx:1.7.9 
+ - name: animals 
+   image: supergiantkir/animals:bear
    ports: 
    - containerPort: 80
    volumeMounts:
