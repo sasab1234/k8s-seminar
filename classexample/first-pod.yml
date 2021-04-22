@@ -8,8 +8,18 @@ spec:
    image: nginx:1.7.9 
    ports: 
    - containerPort: 80
+   volumeMounts:
+    - name: app-storage
+      mountPath: /storage/nginx
  - name: springapp
    image: yanivomc/spring-music:latest
    ports: 
    - containerPort: 8080
+   volumeMounts:
+    - name: app-storage
+      mountPath: /storage/data
 
+
+ volumes:
+ - name: app-storage
+   emptyDir: {}
