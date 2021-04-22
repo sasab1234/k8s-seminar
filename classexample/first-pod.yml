@@ -18,8 +18,7 @@ spec:
    volumeMounts:
     - name: app-storage
       mountPath: /storage
-
-
+      
  volumes:
  - name: app-storage
    emptyDir: {}
