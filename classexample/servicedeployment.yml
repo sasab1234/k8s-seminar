@@ -1,0 +1,40 @@
+---
+kind: Service     
+apiVersion: v1     
+metadata:
+  name: my-service 
+spec:
+  selector:
+    app: animalsApp   
+  ports:          
+  - name: http     
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 8080
+  type: LoadBalancer
+
+---
+apiVersion: v1 
+kind: Pod  
+metadata: 
+ name: animals
+labels:
+ app: animalsApp
+ 
+spec:
+ containers: 
+ - name: animal-bear 
+   image: supergiantkir/animals:bear
+   ports: 
+   - containerPort: 80
+
+
+ - name: animal-moose
+   image: supergiantkir/animals:moose
+   ports: 
+   - containerPort: 8080
+ 
